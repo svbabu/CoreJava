@@ -1,0 +1,20 @@
+import java.util.*;
+class Address implements Cloneable
+{
+	
+	public static void main(String args[])
+	{
+	
+	Map<Character,Integer> map=new HashMap();
+	map.put('c',2);
+	map.put('a',1);
+	map.put('b',4);
+     Iterator<Intger> it=map.values().iterator();
+	 while(it.hasNext())
+	 {
+	 Character c=it.next();
+	 System.out.print(map.get(c));
+
+	
+
+}

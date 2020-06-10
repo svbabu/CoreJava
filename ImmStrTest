@@ -1,0 +1,12 @@
+
+
+public class ImmStrTest
+{
+public static void main(String args[])
+{
+	String name="singu";
+	System.out.println(name);
+}
+}
+
+   

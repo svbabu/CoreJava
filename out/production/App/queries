@@ -1,0 +1,198 @@
+
+https://www.memonotepad.com/
+
+employee and dept tables:::::::::
+
+table-1)create table employee (eid  number primary key,name varchar2(20),salary number(20,9),did number);
+table-2)create table dept(did number,dname varchar2(20), location varchar(20),job varchar2(20));
+
+Table Data:::::::::::::::::::::::
+eid  name             salary            did
+3	Sree	          100000	        111
+2	babu	          200000	        111
+1	ananth	          150000	        111
+4	bhargav	          500000	        112
+5	sharama	          600000	        112
+6	tangalakshmi	  200000	        112
+7	vara	          700000	        112
+:::::::::::::::::::::::::::::::::::::::::::
+did dname location   job
+111	IT	banglore	developer
+112	IT	banglore	manager
+113	IT	banglore	tester
+1)query for list of salaries of  maneger wise?
+select name,job, salary from employee inner join dept on employee.did=dept.did where job='manager';
+      name           job         salary
+ o/p)bhargav	    manager	    500000
+     sharama	    manager	    600000
+     tangalakshmi	manager	    200000
+     vara	        manager	    700000
+
+2) query per fetch slary from specific manager name wise (ex:vara is manager name)?
+select name,job, salary from employee inner join dept on employee.did=dept.did where job='manager' And name='vara';
+
+3)find the highest salary from list of employees?
+select name,job,salary from employee inner join dept on employee.did=dept.did where salary in(select max(salary)from employee);
+
+o/p)   name  job     salary
+      vara	manager	700000
+
+4)find the 2 highest salary from list of employees from manager wise?
+
+select emp1.*,de.job from employee emp1 inner join dept de  on 2-1=(select count(distinct(emp2.salary)) from employee emp2 where emp2.salary>emp1.salary And job='manager');
+
+o/p) eid   name     salary  did  job
+     5	  sharama	600000	112	manager
+5) suppose if we find second hihest salry from employee as developer then give job='developer' instead of manager  
+
+note)Refer to above query  as just change job='developer' thats it.
+note similarlly 3rd hihest and 4h and nth hihest salary  refere to above query .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select *from EMPLOYEE;
+select *from dept;
+
+select *from student;
+drop  table student;
+
+select *from employee;
+
+create table empl(eid number(10),name varchar2(10), did number(10));
+
+insert into empl values(3,'Sree',103);
+
+select *from empl;
+select*from dep;
+ desc  dep;
+
+select max(salary),did,location from empl inner join dep on empl.did=dep.did ;
+select eid, name,salary,did from empl where salary in(select max(salary) from dep group by did);
+select  d.did,
+   max(d.salary)
+from
+   dep d
+   inner join empl e on d.did = e.did
+group by
+  d.did order by salary desc;
+
+
+
+SELECT d.did,d.dname, d.salary, e.name
+FROM empl e
+INNER JOIN dep  d ON d.did = e.did
+WHERE d.salary IN (SELECT MAX(salary) FROM dep);
+
+
+drop table dep;
+
+create table dep(did number,name varchar2(10),salary number);
+
+alter table dep rename column name to dname;
+insert into dep values(101,'developer',150000);
+commit;
+select * from employee emp1  where 1-1= (select count(distinct(emp2.salary)) from employee emp2 where emp2.salary>emp1.salary) 
+
+
+
+create table student(id number primary key ,firstName varchar2(20),lastName varchar2(20),section varchar2(20));
+insert into student values(1,'Teja','singu','A');
+select name from employee where ROWNUM=13;
+(select name from employee where ROWNUM=4
+ minus  select name from employee where ROWNUM<3);
+
+select name from employee where ID in(11,13);
+
+desc employee
+alter table employee rename COLUMN eid to  id;
+
+SELECT Emp, deptno, salary
+FROM Emp a
+WHERE 1 = (SELECT COUNT(DISTINCT salary) 
+        FROM Emp b 
+        WHERE b.salary > a.salary AND a.deptno = b.deptno)
+SELECT d.id, e.name, e.salary
+FROM employee e
+INNER JOIN dept d ON d.id = e.id
+WHERE e.salary  IN(SELECT MAX(salary) FROM (select max(salary) from employee order by salary desc));
+
+
+
+SELECT DISTINCT d1.id,e1.salary FROM employee  e1, dept d1
+WHERE 2 =(SELECT count(DISTINCT e2.salary) FROM employee e2, dept d2
+WHERE e2.salary >= e1.salary
+AND d2.id= e2.id
+AND d1.id = d2.id)
+AND d1.id = e1.id;
+
+SELECT max(e1.salary),e1.id FROM employee e1
+WHERE salary < (SELECT max(salary ) FROM employee e2 WHERE e2.id = e1.id) GROUP BY e1.id
+
+select *from  dept  cross join employee ;
+
+SELECT MAX (e1.salary) , e1.id
+
+
+FROM employee e1
+
+
+WHERE e1.salary<
+
+
+    (SELECT MAX (e2.salary)
+
+
+     FROM employee e2
+
+
+     WHERE e1.id= e2.id
+
+
+     GROUP BY e2.dept)
+
+
+GROUP BY e1.dept
+select *from mock;
+
+
+
+alter table employee add(salary decimal(2,5));
+alter table employee modify(salary number(9))
+update employee  set salary='15000'  where eid=13;
+
+select max(salary) from employee where salary>=(select max(salary) from(select max(salary)from employee order by salary desc));
+
+select min(salary) from employee where salary<=(select min(salary) from(select min(salary) from employee order by salary desc));
+
+
+ 
+ create table dept(id number,name varchar2(10),location varchar2(10));
+ insert into dept values(15,'Finanace','bangalore');
+ select *from dept;
+select 
+select *from employee where rownum<=4  and order by salary asc;
+
+
+select count(salary) from employee group by name, salary having salary=7000
